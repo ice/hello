@@ -19,7 +19,7 @@ class RoutesTest extends PHPUnit
     {
         $di = new Di();
         $router = new Router();
-        $routes = require '../App/routes.php';
+        $routes = require __DIR__ . '/../App/routes.php';
         $router->setRoutes($routes);
         $return = $router->handle('GET', $pattern);
 
@@ -41,7 +41,7 @@ class RoutesTest extends PHPUnit
     {
         $di = new Di();
         $router = new Router();
-        $routes = require '../App/routes.php';
+        $routes = require __DIR__ . '/../App/routes.php';
         $router->setRoutes($routes);
         $return = $router->handle('POST', $pattern);
 
@@ -67,14 +67,12 @@ class RoutesTest extends PHPUnit
             ['/index', ['default', 'index', 'index', []]],
             ['/index/index', ['default', 'index', 'index', []]],
             ['/index/test', ['default', 'index', 'test', []]],
-            
             ['/user', ['default', 'user', 'index', []]],
             ['/user/', ['default', 'user', 'index', []]],
             ['/user/3', ['default', 'user', 'index', ['id' => 3]]],
             ['/user/signup', ['default', 'user', 'signup', []]],
             ['/user/profile/1', ['default', 'user', 'profile', ['id' => 1]]],
             ['/user/profile/ice', ['default', 'user', 'profile', ['param' => 'ice']]],
-            
             ['/post/details/7/friendly-title', ['default', 'post', 'details', ['id' => 7, 'param' => 'friendly-title']]],
         ];
     }
@@ -92,15 +90,14 @@ class RoutesTest extends PHPUnit
             ['/index', ['default', 'index', 'index', []]],
             ['/index/index', ['default', 'index', 'index', []]],
             ['/index/test', ['default', 'index', 'test', []]],
-            
             ['/user', ['default', 'user', 'index', []]],
             ['/user/', ['default', 'user', 'index', []]],
             ['/user/3', ['default', 'user', 'index', ['id' => 3]]],
             ['/user/signup', ['default', 'user', 'signup', []]],
             ['/user/profile/1', ['default', 'user', 'profile', ['id' => 1]]],
             ['/user/profile/ice', ['default', 'user', 'profile', ['param' => 'ice']]],
-            
             ['/post/details/7/friendly-title', ['default', 'post', 'details', ['id' => 7, 'param' => 'friendly-title']]],
         ];
     }
+
 }
