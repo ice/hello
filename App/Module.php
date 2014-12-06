@@ -2,7 +2,7 @@
 
 namespace App;
 
-use Ice\Di\DiInterface;
+use Ice\Di;
 use Ice\Mvc\ModuleInterface;
 
 /**
@@ -27,10 +27,10 @@ class Module implements ModuleInterface
     /**
      * Register specific services for the module
      *
-     * @param object $di dependency Injector
+     * @param object $di Dependency injector
      * @return void
      */
-    public function registerServices(DiInterface $di)
+    public function registerServices(Di $di)
     {
         
     }
