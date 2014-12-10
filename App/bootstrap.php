@@ -35,14 +35,5 @@ $di->set('view', function () {
     return $view;
 });
 
-// Create a MVC application
-$app = new \Ice\Mvc\App($di);
-
-// Some default module must be set
-$app->setModules([
-    "default" => [
-        "namespace" => __NAMESPACE__,
-        "path" => __DIR__
-]]);
-
-return $app;
+// Create and return a MVC application
+return new \Ice\Mvc\App($di);
