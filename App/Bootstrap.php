@@ -3,7 +3,7 @@
 namespace App;
 
 /**
- * Register the psr-4 auto loader. You will be able to use: 
+ * Register the psr-4 auto loader. You will be able to use:
  * App\Controller, App\Model, App\Library, etc.
  */
 (new \Ice\Loader())
@@ -30,7 +30,7 @@ $di->set('router', function () use ($routes) {
 
 $di->set('view', function () {
     $view = new \Ice\Mvc\View();
-    $view->setViewsDir(__DIR__ . '/view/');
+    $view->setViewsDir(__DIR__ . '/View/');
 
     return $view;
 });
