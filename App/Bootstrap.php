@@ -10,20 +10,32 @@ namespace App;
     ->addNamespace(__NAMESPACE__, __DIR__)
     ->register();
 
-// Load universal routes
-$routes = require_once __DIR__ . '/routes.php';
-
 // Create a dependency injector container
 $di = new \Ice\Di();
 
 // Set some services
 $di->request = new \Ice\Http\Request();
 $di->response = new \Ice\Http\Response();
-$di->dispatcher = new \Ice\Mvc\Dispatcher();
 
-$di->set('router', function () use ($routes) {
+$di->set('dispatcher', function () {
+    $dispatcher = new \Ice\Mvc\Dispatcher();
+    $dispatcher->setNamespace(__NAMESPACE__);
+
+    return $dispatcher;
+});
+
+$di->set('router', function () {
     $router = new \Ice\Mvc\Router();
-    $router->setRoutes($routes);
+    $router->setRoutes([
+        // The universal routes
+        [['GET', 'POST'], '/{controller:[a-z]+}/{action:[a-z]+}/{id:\d+}/{param}'],
+        [['GET', 'POST'], '/{controller:[a-z]+}/{action:[a-z]+}/{id:\d+}'],
+        [['GET', 'POST'], '/{controller:[a-z]+}/{action:[a-z]+}/{param}'],
+        [['GET', 'POST'], '/{controller:[a-z]+}/{action:[a-z]+[/]?}'],
+        [['GET', 'POST'], '/{controller:[a-z]+}/{id:\d+}'],
+        [['GET', 'POST'], '/{controller:[a-z]+[/]?}'],
+        [['GET', 'POST'], ''],
+    ]);
 
     return $router;
 });
