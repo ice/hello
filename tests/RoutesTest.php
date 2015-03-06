@@ -10,6 +10,41 @@ use App\Routes;
 class RoutesTest extends PHPUnit
 {
 
+    private static $di;
+
+    /**
+     * Run public/index.php and fetch Di
+     */
+    public static function setUpBeforeClass()
+    {
+        $di = new Di();
+        $di->set('router', function () {
+            $router = new Router();
+            $router->setRoutes([
+                // The universal routes
+                [['GET', 'POST'], '/{controller:[a-z]+}/{action:[a-z]+}/{id:\d+}/{param}'],
+                [['GET', 'POST'], '/{controller:[a-z]+}/{action:[a-z]+}/{id:\d+}'],
+                [['GET', 'POST'], '/{controller:[a-z]+}/{action:[a-z]+}/{param}'],
+                [['GET', 'POST'], '/{controller:[a-z]+}/{action:[a-z]+[/]?}'],
+                [['GET', 'POST'], '/{controller:[a-z]+}/{id:\d+}'],
+                [['GET', 'POST'], '/{controller:[a-z]+[/]?}'],
+                [['GET', 'POST'], ''],
+            ]);
+
+            return $router;
+        });
+        
+        self::$di = $di;
+    }
+
+    /**
+     * Get service from Di
+     */
+    public function __get($service)
+    {
+        return self::$di->{$service};
+    }
+
     /**
      * Test route matching for universal routes and GET method
      *
@@ -17,16 +52,12 @@ class RoutesTest extends PHPUnit
      */
     public function testUniversalGET($pattern, $expected)
     {
-        $di = new Di();
-        $router = new Router();
-        $routes = require __DIR__ . '/../App/routes.php';
-        $router->setRoutes($routes);
-        $return = $router->handle('GET', $pattern);
+        $return = $this->router->handle('GET', $pattern);
 
-        $this->assertEquals('GET', $router->getMethod());
+        $this->assertEquals('GET', $this->router->getMethod());
 
         if (is_array($return)) {
-            $this->assertEquals($expected, [$router->getModule(), $router->getHandler(), $router->getAction(), $router->getParams()], $pattern);
+            $this->assertEquals($expected, [$this->router->getModule(), $this->router->getHandler(), $this->router->getAction(), $this->router->getParams()], $pattern);
         } else {
             $this->assertEquals($expected, null, "The route wasn't matched by any route");
         }
@@ -39,16 +70,12 @@ class RoutesTest extends PHPUnit
      */
     public function testUniversalPOST($pattern, $expected)
     {
-        $di = new Di();
-        $router = new Router();
-        $routes = require __DIR__ . '/../App/routes.php';
-        $router->setRoutes($routes);
-        $return = $router->handle('POST', $pattern);
+        $return = $this->router->handle('POST', $pattern);
 
-        $this->assertEquals('POST', $router->getMethod());
+        $this->assertEquals('POST', $this->router->getMethod());
 
         if (is_array($return)) {
-            $this->assertEquals($expected, [$router->getModule(), $router->getHandler(), $router->getAction(), $router->getParams()], $pattern);
+            $this->assertEquals($expected, [$this->router->getModule(), $this->router->getHandler(), $this->router->getAction(), $this->router->getParams()], $pattern);
         } else {
             $this->assertEquals($expected, null, "The route wasn't matched by any route");
         }
