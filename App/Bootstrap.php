@@ -16,6 +16,7 @@ $di = new \Ice\Di();
 // Set some services
 $di->request = new \Ice\Http\Request();
 $di->response = new \Ice\Http\Response();
+$di->tag = new \Ice\Tag();
 
 $di->set('dispatcher', function () {
     $dispatcher = new \Ice\Mvc\Dispatcher();
@@ -45,6 +46,12 @@ $di->set('view', function () {
     $view->setViewsDir(__DIR__ . '/View/');
 
     return $view;
+});
+
+$di->set('db', function () {
+    $driver = new \Ice\Db\Driver\Pdo('mysql:host=localhost;port=3306;dbname=demo_hello', 'demo', 'demo');
+    
+    return new \Ice\Db($driver);
 });
 
 // Create and return a MVC application

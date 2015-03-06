@@ -1,0 +1,8 @@
+<?php if (count($users)):?>
+    <?php foreach ($users as $user): ?>
+        <?php echo $user->id . '. ' . $user->name . ': ' . $user->email ?><br>
+    <?php endforeach ?>
+<?php else: ?>
+    No users found.<br>
+<?php endif ?>
+<?php echo $this->tag->linkTo(['user/signup', 'Sign up']) ?>
