@@ -14,13 +14,6 @@ $di->loader
 $di->dispatcher
     ->setNamespace(__NAMESPACE__);
 
-$di->router
-    ->setRoutes([
-        [['GET', 'POST'], '/{controller:[a-z]+}/{action:[a-z]+[/]?}'],
-        ['GET', '/{controller:[a-z]+[/]?}'],
-        ['GET', ''],
-    ]);
-
 $di->view
     ->setViewsDir(__DIR__ . '/View/');
 
