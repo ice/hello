@@ -14,8 +14,8 @@ before_script:
 
 script:
   - php vendor/bin/phpcs
-  - php vendor/bin/phpunit --configuration --testsuite=all
+  - php vendor/bin/phpunit --testsuite=all
 
 after_failure:
   - sudo apt-get -qq install gdb
-  - gdb -quiet -command=framework/tests/ci/gdb --args $(phpenv which php) vendor/bin/phpunit --debug --colors --configuration tests/phpunit.xml --testsuite=all
+  - gdb -quiet -command=framework/tests/ci/gdb --args $(phpenv which php) vendor/bin/phpunit --debug --colors --testsuite=all
