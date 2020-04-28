@@ -4,7 +4,7 @@ namespace Tests;
 
 use PHPUnit_Framework_TestCase as PHPUnit;
 use Ice\Di;
-use Ice\Mvc\Router;
+use Ice\Mvc\Fastrouter as Router;
 use App\Routes;
 
 class RoutesTest extends PHPUnit
@@ -33,7 +33,7 @@ class RoutesTest extends PHPUnit
 
             return $router;
         });
-        
+
         self::$di = $di;
     }
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controllers;
 
-use App\Model\Users;
+use App\Models\Users;
 use Ice\Validation;
 
 /**
@@ -19,7 +19,6 @@ class UserController extends IndexController
      */
     public function getSignupAction()
     {
-        
     }
 
     /**
