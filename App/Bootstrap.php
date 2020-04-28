@@ -14,8 +14,8 @@ $di->loader
 $di->dispatcher
     ->setNamespace(__NAMESPACE__);
 
-$di->router
-    ->setRoutes();
+// Use the fastroute
+$di->set('router', new \Ice\Mvc\Fastrouter());
 
 $di->view
     ->setViewsDir(__DIR__ . '/Views/');
