@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controllers;
 
 use Ice\Mvc\Controller;
 
@@ -18,6 +18,5 @@ class IndexController extends Controller
      */
     public function indexAction()
     {
-        
     }
 }

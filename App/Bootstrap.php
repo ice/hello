@@ -14,8 +14,11 @@ $di->loader
 $di->dispatcher
     ->setNamespace(__NAMESPACE__);
 
+$di->router
+    ->setRoutes();
+
 $di->view
-    ->setViewsDir(__DIR__ . '/View/');
+    ->setViewsDir(__DIR__ . '/Views/');
 
 $di->set('db', function () {
     $driver = new \Ice\Db\Driver\Pdo('mysql:host=localhost;port=3306;dbname=demo_hello', 'demo', 'demo');
