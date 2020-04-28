@@ -21,7 +21,7 @@ $di->view
     ->setViewsDir(__DIR__ . '/Views/');
 
 $di->set('db', function () {
-    $driver = new \Ice\Db\Driver\Pdo('mysql:host=localhost;port=3306;dbname=demo_hello', 'demo', 'demo');
+    $driver = new \Ice\Db\Driver\Pdo('mysql:host=localhost;port=3306;dbname=ice_hello', 'ice', 'ice');
 
     return new \Ice\Db($driver);
 });
